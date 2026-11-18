@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <title>E-Jurnal Guru & Pengawas Agama Hindu</title>
+
+  <!-- PWA Identity -->
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#ea580c">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="E-Jurnal Hindu">
+  <link rel="icon" type="image/svg+xml" href="icon.svg">
+  <link rel="apple-touch-icon" href="icon.svg">
+
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background-color: #ea580c;
+    }
+    iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      display: block;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Iframe Fullscreen dengan Izin Akses GPS Lokasi Presensi -->
+  <iframe 
+    id="appFrame" 
+    src="https://script.google.com/macros/s/AKfycbzjEDBQLpOLcqELrtA15h5j6tqrqIsCnpJppZNUomifjV4_lm3erfzd50mIrA-_Sb87/exec" 
+    allow="geolocation; camera; microphone">
+  </iframe>
+
+  <script>
+    // Daftarkan Service Worker untuk PWA
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('sw.js')
+          .then(reg => console.log('PWA Service Worker terdaftar:', reg.scope))
+          .catch(err => console.error('PWA Service Worker gagal:', err));
+      });
+    }
+  </script>
+</body>
+</html>
